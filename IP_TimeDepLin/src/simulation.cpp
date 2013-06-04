@@ -22,6 +22,9 @@ SiteList    invadedSites;
 BondMap     accessibleBonds;
 std::deque<Bond> growth;
 std::deque<Bond> trapped;
+long int N = 50000;
+double beta = 0.01;
+int L = 100;
 
 double get_time(void)
 {
@@ -38,9 +41,23 @@ Site get_neighbor(Site pos, unsigned int direction)
 		case 1: // down
             return std::make_pair(pos.first, pos.second-1);
 		case 2: // left
-            return std::make_pair(pos.first-1, pos.second);
+			if(pos.first == 0)
+			{
+				return std::make_pair(L-1, pos.second);
+			}
+			else
+			{
+				return std::make_pair(pos.first-1, pos.second);
+			}
 		case 3: // right
-            return std::make_pair(pos.first+1, pos.second);
+			if(pos.first == L-1)
+			{
+				return std::make_pair(0, pos.second);
+			}
+			else
+			{
+				return std::make_pair(pos.first+1, pos.second);
+			}
     }
 }
 
@@ -61,7 +78,7 @@ bool invade_bond(Bond & inv_bond, double cur_time)
     for (int dir=0;dir<4;++dir)
     {
     	newNeighbor = get_neighbor(invSite, dir);
-    	if (invadedSites.count(newNeighbor) == 0)
+    	if (invadedSites.count(newNeighbor) == 0 and newNeighbor.second > 0)
     	{
     		newTime = get_time()+cur_time;
         	newBond = std::make_pair(newTime, std::make_pair(invSite, newNeighbor));
@@ -74,19 +91,18 @@ bool invade_bond(Bond & inv_bond, double cur_time)
 
 int main(int argc, char **argv)
 {
-	long int i, N;
 	bool already_invaded;
+	long int i;
 
 	N = atoi(argv[1]);
+	L = atoi(argv[2]);
 	srand48(time(NULL));
 
-    Site start = std::make_pair(0, 0);
-    invadedSites.insert(start);
-    for (int neigh=0;neigh<4; neigh++)
+    for (int border=0; border<L; border++)
     {
     	Bond newBond;
     	double newTime = get_time();
-    	newBond = std::make_pair(newTime, std::make_pair(start, get_neighbor(start, neigh)));
+    	newBond = std::make_pair(newTime, std::make_pair(std::make_pair(border,0), std::make_pair(border,1)));
     	accessibleBonds.insert(std::make_pair(newTime, newBond));
     }
 

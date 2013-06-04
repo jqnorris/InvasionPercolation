@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>IP_TimeDep</name>
+	<name>IP_TimeDepLin</name>
 	<comment></comment>
 	<projects>
-		<project>IP_TimeDep</project>
+		<project>IP_TimeDepLin</project>
 		<project>Simulation</project>
 	</projects>
 	<buildSpec>
