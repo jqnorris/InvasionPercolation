@@ -58,11 +58,9 @@ src/simulation.o : ../src/simulation.cpp \
     /usr/include/x86_64-linux-gnu/bits/select.h \
     /usr/include/x86_64-linux-gnu/bits/sigset.h \
     /usr/include/x86_64-linux-gnu/bits/time.h \
-    /usr/include/x86_64-linux-gnu/bits/select2.h \
     /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
     /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
     /usr/include/alloca.h \
-    /usr/include/x86_64-linux-gnu/bits/stdlib.h \
     /usr/include/c++/4.6/fstream \
     /usr/include/c++/4.6/istream \
     /usr/include/c++/4.6/ios \
@@ -74,7 +72,6 @@ src/simulation.o : ../src/simulation.cpp \
     /usr/include/stdio.h \
     /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h \
     /usr/include/x86_64-linux-gnu/bits/wchar.h \
-    /usr/include/x86_64-linux-gnu/bits/wchar2.h \
     /usr/include/c++/4.6/bits/char_traits.h \
     /usr/include/c++/4.6/bits/localefwd.h \
     /usr/include/c++/4.6/x86_64-linux-gnu/./bits/c++locale.h \
@@ -97,7 +94,6 @@ src/simulation.o : ../src/simulation.cpp \
     /usr/include/x86_64-linux-gnu/bits/environments.h \
     /usr/include/x86_64-linux-gnu/bits/confname.h \
     /usr/include/getopt.h \
-    /usr/include/x86_64-linux-gnu/bits/unistd.h \
     /usr/include/c++/4.6/x86_64-linux-gnu/./bits/atomic_word.h \
     /usr/include/c++/4.6/bits/locale_classes.h \
     /usr/include/c++/4.6/string \
@@ -126,19 +122,6 @@ src/simulation.o : ../src/simulation.cpp \
     /usr/include/_G_config.h \
     /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
     /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
-    /usr/include/x86_64-linux-gnu/bits/stdio.h \
-    /usr/include/x86_64-linux-gnu/bits/stdio2.h \
     /usr/include/c++/4.6/x86_64-linux-gnu/./bits/basic_file.h \
     /usr/include/c++/4.6/x86_64-linux-gnu/./bits/c++io.h \
-    /usr/include/c++/4.6/bits/fstream.tcc \
-    /usr/include/c++/4.6/cmath \
-    /usr/include/math.h \
-    /usr/include/x86_64-linux-gnu/bits/huge_val.h \
-    /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
-    /usr/include/x86_64-linux-gnu/bits/huge_vall.h \
-    /usr/include/x86_64-linux-gnu/bits/inf.h \
-    /usr/include/x86_64-linux-gnu/bits/nan.h \
-    /usr/include/x86_64-linux-gnu/bits/mathdef.h \
-    /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-    /usr/include/x86_64-linux-gnu/bits/mathinline.h \
-    /usr/include/c++/4.6/iostream
+    /usr/include/c++/4.6/bits/fstream.tcc

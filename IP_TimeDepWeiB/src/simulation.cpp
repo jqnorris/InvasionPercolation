@@ -22,20 +22,11 @@ SiteList    invadedSites;
 BondMap     accessibleBonds;
 std::deque<Bond> growth;
 std::deque<Bond> trapped;
-long int N = 50000;
-double beta = 2;
-int L = 1000;
-double pc = 0.49;
-double tau_short = 0; // pow(10, -20);
-double tau_long = 1;
 
 double get_time(void)
 {
-	if (drand48() > pc)
-	{
-		return tau_long*pow(-log(1-drand48()), 1.0/beta);
-	}
-	return tau_short*pow(-log(1-drand48()), 1.0/beta);
+	double beta = 0.25;
+	return floor(pow(-log(1-drand48()), 1.0/beta)*100)/100.0;
 }
 
 Site get_neighbor(Site pos, unsigned int direction)
@@ -47,23 +38,9 @@ Site get_neighbor(Site pos, unsigned int direction)
 		case 1: // down
             return std::make_pair(pos.first, pos.second-1);
 		case 2: // left
-			if(pos.first == 0)
-			{
-				return std::make_pair(L-1, pos.second);
-			}
-			else
-			{
-				return std::make_pair(pos.first-1, pos.second);
-			}
+            return std::make_pair(pos.first-1, pos.second);
 		case 3: // right
-			if(pos.first == L-1)
-			{
-				return std::make_pair(0, pos.second);
-			}
-			else
-			{
-				return std::make_pair(pos.first+1, pos.second);
-			}
+            return std::make_pair(pos.first+1, pos.second);
     }
 }
 
@@ -84,7 +61,7 @@ bool invade_bond(Bond & inv_bond, double cur_time)
     for (int dir=0;dir<4;++dir)
     {
     	newNeighbor = get_neighbor(invSite, dir);
-    	if (invadedSites.count(newNeighbor) == 0 and newNeighbor.second > 0)
+    	if (invadedSites.count(newNeighbor) == 0)
     	{
     		newTime = get_time()+cur_time;
         	newBond = std::make_pair(newTime, std::make_pair(invSite, newNeighbor));
@@ -97,18 +74,19 @@ bool invade_bond(Bond & inv_bond, double cur_time)
 
 int main(int argc, char **argv)
 {
+	long int i, N;
 	bool already_invaded;
-	long int i;
 
 	N = atoi(argv[1]);
-	L = atoi(argv[2]);
 	srand48(time(NULL));
 
-    for (int border=0; border<L; border++)
+    Site start = std::make_pair(0, 0);
+    invadedSites.insert(start);
+    for (int neigh=0;neigh<4; neigh++)
     {
     	Bond newBond;
     	double newTime = get_time();
-    	newBond = std::make_pair(newTime, std::make_pair(std::make_pair(border,0), std::make_pair(border,1)));
+    	newBond = std::make_pair(newTime, std::make_pair(start, get_neighbor(start, neigh)));
     	accessibleBonds.insert(std::make_pair(newTime, newBond));
     }
 
@@ -126,8 +104,7 @@ int main(int argc, char **argv)
 
 	std::ofstream toFile1("fractures.txt", std::ios::trunc);
 	std::ofstream toFile2("trapped.txt", std::ios::trunc);
-	toFile1 << "N=" << growth.size() << "\n";
-	toFile1 << "L=" << L << "\n";
+	toFile1 << growth.size() << "\n";
 	toFile2 << trapped.size() << "\n";
 	toFile1 << "Invasion for: temp" << "\n";
 	toFile2 << "Trapping for: temp" << "\n";

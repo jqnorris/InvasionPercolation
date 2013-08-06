@@ -140,5 +140,4 @@ src/simulation.o : ../src/simulation.cpp \
     /usr/include/x86_64-linux-gnu/bits/nan.h \
     /usr/include/x86_64-linux-gnu/bits/mathdef.h \
     /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-    /usr/include/x86_64-linux-gnu/bits/mathinline.h \
-    /usr/include/c++/4.6/iostream
+    /usr/include/x86_64-linux-gnu/bits/mathinline.h
