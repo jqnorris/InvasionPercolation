@@ -23,19 +23,21 @@ BondMap     accessibleBonds;
 std::deque<Bond> growth;
 std::deque<Bond> trapped;
 long int N = 50000;
-double beta = 2;
+double beta_short = 8;
+double beta_long = 2;
 int L = 1000;
 double pc = 0.49;
-double tau_short = 0; // pow(10, -20);
+double tau_short = 0.5*pow(10, -5);
 double tau_long = 1;
 
 double get_time(void)
 {
 	if (drand48() > pc)
 	{
-		return tau_long*pow(-log(1-drand48()), 1.0/beta);
+		return tau_long*pow(-log(1-drand48()), 1.0/beta_long);
 	}
-	return tau_short*pow(-log(1-drand48()), 1.0/beta);
+	//return tau_short*pow(-log(1-drand48()), 1.0/beta_short);
+	return tau_short;
 }
 
 Site get_neighbor(Site pos, unsigned int direction)
@@ -128,7 +130,8 @@ int main(int argc, char **argv)
 	std::ofstream toFile2("trapped.txt", std::ios::trunc);
 	toFile1 << "N=" << growth.size() << "\n";
 	toFile1 << "L=" << L << "\n";
-	toFile2 << trapped.size() << "\n";
+	toFile2 << "T=" << trapped.size() << "\n";
+	toFile2 << "L=" << L << "\n";
 	toFile1 << "Invasion for: temp" << "\n";
 	toFile2 << "Trapping for: temp" << "\n";
 	toFile1.precision(17);
