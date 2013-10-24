@@ -69,7 +69,7 @@ bool invade_bond(Bond & inv_bond)
 }
 
 long int i, N;
-double cutoff = 0.499;
+double cutoff = 0.4995;
 long long int counter=0;
 bool already_invaded;
 const int num_r_values = 100;
